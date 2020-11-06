@@ -1,0 +1,67 @@
+body > h1 {
+    text-align: center;
+    width: 100%;
+}
+
+.outer-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.inner-container,
+.bookmark-init {
+    width: 65%;
+    margin: auto;
+}
+
+.editable,
+.expanded {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.condensed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bookmark-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 4;
+}
+
+.bookmark-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.bookmark-controls > button {
+    margin: 12px;
+}
+
+.editable .bookmark-desc {
+    height: 192px;
+    margin: 6px 0;
+}
+
+.bookmark,
+.bookmark-new {
+    border: 1px solid black;
+}
+
+.expanded,
+.editable {
+    height: auto;
+}
+
+form > * {
+    margin: 12px;
+}

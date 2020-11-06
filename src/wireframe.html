@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <title>HTML Wireframe</title>
+</head>
+<body>
+    <h1>Main Bookmark Widget</h1>
+    <hr>
+    <article class="outer-container">
+        <section class="inner-container">
+            <h2>Editable</h2>
+            <form class="bookmark-item editable">
+                <div class="bookmark-info">
+                    <input type="text" class="bookmark-title" placeholder="Bookmark">
+                    <div class="bookmark-stars"></div>
+                    <input type="text" class="bookmark-link" placeholder="https://bookmark.link/">
+                    <textarea class="bookmark-desc" placeholder="Bookmark Description"></textarea>
+                </div>
+                <div class="bookmark-controls">
+                    <button class="bookmark-save">Save</button>
+                    <button class="bookmark-delete">Delete</button>
+                </div>
+            </form>
+            <br>
+            <h2>Expanded</h2>
+            <form class="bookmark-item expanded">
+                <div class="bookmark-info">
+                    <h3 class="bookmark-title">Bookmark</h3>
+                    <div class="bookmark-stars"></div>
+                    <p class="bookmark-desc">Bookmark Description</p>
+                </div>
+                <div class="bookmark-controls">
+                    <button class="bookmark-edit">Edit</button>
+                </div>
+            </form>
+            <br>
+            <h2>Condensed</h2>
+            <form class="bookmark-item condensed">
+                <div class="bookmark-info">
+                    <h3 class="bookmark-title">Bookmark</h3>
+                    <div class="bookmark-stars"></div>
+                </div>
+            </form>
+        </section>
+    </article>
+</body>
+</html>

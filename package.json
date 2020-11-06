@@ -1,0 +1,27 @@
+{
+  "name": "thinkful-bookmark-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cuid": "^2.1.6",
+    "jquery": "^3.4.1",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^5.0.0",
+    "file-loader": "^6.1.1",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.2.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
