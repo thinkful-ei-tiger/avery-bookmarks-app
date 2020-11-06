@@ -5,8 +5,8 @@ import store from './store';
 
 const generateElement = (bookmark) => {
   let bookmarkInfo = `
-    <h3 class="bookmark-title">${bookmark.title}</h3>
-    <p class="bookmark-link"><a href="${bookmark.url}">${bookmark.url}</a></p>
+    </input><h3 class="bookmark-title">${bookmark.title}</h3>
+    </input><p class="bookmark-link"><a href="${bookmark.url}">${bookmark.url}</a></p>
     `;
   let bookmarkControls = `
     <button class="bookmark-edit">Edit</button>
@@ -18,18 +18,18 @@ const generateElement = (bookmark) => {
     listType = 'expanded';
     {
       bookmarkInfo = `
-        <input type="text" class="bookmark-title" placeholder="${bookmark.title}">
+        <input type="text" class="bookmark-title" placeholder="${bookmark.title}"></input>
         <input type="text" class="bookmark-link" placeholder="${bookmark.url}</input>
         <textarea class="bookmark-desc" placeholder="${bookmark.desc}"></textarea>
       `;
       bookmarkControls = `
-        <button type="submit" class="bookmark-save">Save</button>
+        <button class="bookmark-save">Save</button>
       `;
     }
   }
 
   return `
-    <form class="bookmark ${bookmark.listType}" data-bookmark-id="${bookmark.id}">
+    <form class="bookmark ${listType}" data-bookmark-id="${bookmark.id}">
       <div class="bookmark-info">
         ${bookmarkInfo}
       </div>
@@ -87,6 +87,7 @@ const handleAddBookmark = () => {
       .then(res => res.json())
       .then(newBookmark => {
         store.addBookmark(newBookmark);
+        bindListeners();
         render();
       });
   });
@@ -111,23 +112,33 @@ const handleDeleteBookmarkClicked = () => {
   });
 };
 
-const handleExpandBookmark = () => {
-  $('.bookmark').on('click', '.bookmark-edit', event => {
-    event.preventDefault();
-    const id = getBookmarkIdFromElement(event.currentTarget);
-    store.findAndUpdate(id, {expanded: true});
-  })
-}
-
-const handleEditBookmarkSubmit = () => {
-  $('#bookmark-save').submit(event => {
-    console.log('Edit handle triggered');
+const handleEditBookmarkClicked = () => {
+  $('.bookmark').on('hover', '.bookmark-edit', event => {=
     event.preventDefault();
     const id = getBookmarkIdFromElement(event.currentTarget);
     api.editBookmark(id)
       .then(res => res.json())
       .then(bookmark => {
-        store.findAndUpdate(bookmark.id);
+        store.findAndUpdate(bookmark.id, {expanded: true});
+        handleSaveBookmarkSubmit();
+        render();
+      });
+  });
+};
+
+const handleSaveBookmarkSubmit = () => {
+  $('.bookmark').on('click', '.bookmark-save', event => {
+    event.preventDefault();
+    const id = getBookmarkIdFromElement(event.currentTarget);
+    api.editBookmark(id)
+      .then(res => res.json())
+      .then(bookmark => {
+        store.findAndUpdate(bookmark.id, {
+          title: bookmark.title,
+          url: bookmark.url,
+          desc: bookmark.desc,
+          expanded: false
+        });
         render();
       });
   });
@@ -136,7 +147,7 @@ const handleEditBookmarkSubmit = () => {
 const bindListeners = () => {
   handleNewBookmark();
   handleDeleteBookmarkClicked();
-  handleEditBookmarkSubmit();
+  handleEditBookmarkClicked();
 };
 
 
