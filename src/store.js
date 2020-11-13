@@ -10,23 +10,23 @@ const addBookmark = (bookmark) => {
   bookmarks.push(bookmark);
 };
 
-const findAndUpdate = (id, newData) => {
-  const currentBookmark = findById(id);
-  Object.assign(currentBookmark, newData);
-};
-
 const findAndDelete = (id) => {
-  let newBookmarks = bookmarks.filter(currentBookmark => currentBookmark.id !== id);
-  return newBookmarks;
+  return this.bookmarks = this.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
 };
 
 const assignFilter = (filterType) => {
   filterBy = filterType;
 };
 
+const findAndUpdate = (id, newData) => {
+  const currentBookmark = findById(id);
+  Object.assign(currentBookmark, newData);
+};
+
 
 export default {
   bookmarks,
+  findById,
   addBookmark,
   findAndUpdate,
   findAndDelete,

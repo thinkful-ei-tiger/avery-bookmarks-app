@@ -62,7 +62,7 @@ const editBookmark = (id, info) => {
 
 const deleteBookmark = (id) => {
   return fetch(
-    `${BASE_URL}bookmarks/${id}`,
+    `${BASE_URL}/bookmarks/${id}`,
     {
       method: 'DELETE'
     }

@@ -1,11 +1,11 @@
 import $ from 'jquery';
-import api from './scripts/api';
-import store from './scripts/store';
 
 import 'normalize.css';
 import './index.css';
 
-import bookmarkList from './scripts/bookmarks';
+import store from './store';
+import api from './api';
+import bookmarkList from './bookmarks';
 
 const main = () => {
   api.getBookmarks()
@@ -13,9 +13,8 @@ const main = () => {
     .then(bookmarks => {
       bookmarks.forEach(bookmark => store.addBookmark(bookmark));
       bookmarkList.render();
+      bookmarkList.bindListeners();
     });
-  bookmarkList.bindListeners();
-  bookmarkList.render();
 };
 
 $(main);
