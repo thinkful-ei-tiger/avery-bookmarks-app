@@ -1,6 +1,6 @@
-const bookmarks = [];
+// this isnt a const and that is gross and bad
+let bookmarks = [];
 let filterBy = 'none';
-let editing = false;
 
 const findById = (id) => {
   return bookmarks.find(currentBookmark => currentBookmark.id === id);
@@ -11,7 +11,8 @@ const addBookmark = (bookmark) => {
 };
 
 const findAndDelete = (id) => {
-  return this.bookmarks = this.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
+  // This doesn't actually delete the bookmark in the UI and I don't understand.
+  return bookmarks = bookmarks.filter(currentBookmark => currentBookmark.id !== id);
 };
 
 const assignFilter = (filterType) => {

@@ -9,6 +9,7 @@ const generateElement = (bookmark) => {
     <p class="bookmark-link"><a href="${bookmark.url}">${bookmark.url}</a></p>
     `;
   let bookmarkControls = `
+    <div class="bookmark-stars">${bookmark.rating}</div>
     <button class="bookmark-edit" type="button">Edit</button>
     <button class="bookmark-delete" type="button">Delete</button>
   `;
@@ -24,6 +25,13 @@ const generateElement = (bookmark) => {
         <textarea class="bookmark-desc" placeholder="${bookmark.desc}"></textarea>
       `;
       bookmarkControls = `
+        <select class="bookmark-stars">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
         <button class="bookmark-save" type="button">Save</button>
       `;
     }
@@ -35,7 +43,6 @@ const generateElement = (bookmark) => {
         ${bookmarkInfo}
       </div>
       <div class="bookmark-controls">
-        <div class="bookmark-stars"></div>
         ${bookmarkControls}
       </div>
     </form>
@@ -67,7 +74,13 @@ const handleNewBookmark = () => {
           <textarea class="bookmark-desc" placeholder="Bookmark Description"></textarea>
         </div>
         <div class="bookmark-controls">
-          <div class="bookmark-stars"></div>
+          <select class="bookmark-stars">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
           <button type="submit">Add</button>
         </div>
       </form>
@@ -84,8 +97,9 @@ const handleAddBookmark = () => {
     const bookmarkName = $('.bookmark-title').val();
     const bookmarkLink = $('.bookmark-link').val();
     const bookmarkDesc = $('.bookmark-desc').val();
+    const bookmarkStars = $('.bookmark-stars').val();
     $('.bookmark-init').html('');
-    api.createBookmark(bookmarkName, bookmarkLink, bookmarkDesc)
+    api.createBookmark(bookmarkName, bookmarkLink, bookmarkDesc, bookmarkStars)
       .then(res => res.json())
       .then(newBookmark => {
         store.addBookmark(newBookmark);
@@ -108,7 +122,8 @@ const handleDeleteBookmarkClicked = () => {
     api.deleteBookmark(id)
       .then(res => res.json())
       .then(() => {
-        store.findAndDelete(id);
+        // why is this the only thing that works its ugly i hate it
+        store.bookmarks = store.findAndDelete(id);
         render();
         bindListeners();
       });
@@ -132,13 +147,14 @@ const handleSaveBookmarkClicked = () => {
     const info = {
       title: $('.bookmark-title').val(),
       url: $('.bookmark-link').val(),
-      desc: $('.bookmark-desc').val()
+      desc: $('.bookmark-desc').val(),
+      rating: $('.bookmark-stars').val()
     }
     api.editBookmark(id, info)
       .then(res => res.json())
       .then(() => {
         store.findAndUpdate(id, info);
-        store.findAndUpdate(id, {expanded: false})
+        store.findAndUpdate(id, {expanded: false});
         render();
         bindListeners();
       });

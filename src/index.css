@@ -43,8 +43,10 @@ body > h1 {
     justify-content: flex-end;
 }
 
-.bookmark-controls > button {
-    margin: 12px;
+.bookmark-controls > button,
+.bookmark-controls > div {
+    height: 32px;
+    margin: 0 6px;
 }
 
 .editable .bookmark-desc {
